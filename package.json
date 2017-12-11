@@ -1,0 +1,26 @@
+{
+  "name": "egg-mount",
+  "version": "0.0.1",
+  "description": "第一个开源库,多多加油. 热爱egg.自动挂载路由.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dahuahe/egg-mount.git"
+  },
+  "keywords": [
+    "mount",
+    "挂载"
+  ],
+  "author": "yaobenxin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dahuahe/egg-mount/issues"
+  },
+  "eggPlugin":{
+    "name": "mount"
+  },
+  "homepage": "https://github.com/dahuahe/egg-mount#readme"
+}
