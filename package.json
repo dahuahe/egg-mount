@@ -1,7 +1,7 @@
 {
   "name": "egg-mount",
   "version": "0.0.1",
-  "description": "第一个开源库,多多加油. 热爱egg.自动挂载路由.",
+  "description": "egg插件,自动加载路由文件及挂载父级路由",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
