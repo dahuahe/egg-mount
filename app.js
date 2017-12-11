@@ -9,6 +9,9 @@ module.exports = app => {
       match: '',
       target: {},
       initializer: (obj, opt) => {
+        //路由挂载
+        app.router.namespace(
+            opt.pathName.replace(/router/g, '').split('.').join('/'));
         return obj;
       }
     })).load();
