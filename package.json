@@ -3,12 +3,33 @@
   "version": "0.0.1",
   "description": "egg插件,自动加载路由文件及挂载父级路由",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dahuahe/egg-mount.git"
+  },
+  "devDependencies": {
+    "autod": "^3.0.0",
+    "autod-egg": "^1.0.0",
+    "egg": "^2.0.0",
+    "egg-bin": "^4.3.0",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.13.0",
+    "eslint": "^4.11.0",
+    "eslint-config-egg": "^5.1.0",
+    "webstorm-disable-index": "^1.2.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --env=prod",
+    "stop": "egg-scripts stop",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "egg-bin test",
+    "test2": "echo \"Error: no test specified\" && exit 1",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
   },
   "keywords": [
     "mount",
@@ -19,7 +40,7 @@
   "bugs": {
     "url": "https://github.com/dahuahe/egg-mount/issues"
   },
-  "eggPlugin":{
+  "eggPlugin": {
     "name": "mount"
   },
   "homepage": "https://github.com/dahuahe/egg-mount#readme"
