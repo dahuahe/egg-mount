@@ -1,39 +1,46 @@
+'use strict';
 const Router = require('egg-core/lib/utils/router');
 const ROUTER = Symbol.for('Mount#router');
 const SUBROUTER = Symbol.for('Mount#subrouter');
 module.exports = {
-  //override EggCore#router
+  // override EggCore#router
   get router() {
-    //sing
     if (this[ROUTER]) {
       return this[ROUTER];
     }
-    //proxy handler
-    let handler = {
-      get: function(target, propKey,receiver) {
-        if(['head','get','put','post','delete'].indexOf(propKey)>=0){
+    const router = new Router({ sensitive: true }, this);
+    // proxy handler fn
+    const handler = {
+      get(target, propKey, receiver) {
+        if (router.methods.indexOf(propKey.toUpperCase()) >= 0) {
           const origMethod = target[propKey];
-          let subRouter = target._getnamespace();
+          const subRouter = target.getNamespace();
           return function(...args) {
             args[0] = (subRouter || '') + args[0];
             return origMethod.apply(this, args);
           };
         }
         return Reflect.get(target, propKey, receiver);
-      }
+      },
     };
-
-    let _router = new Router({sensitive: true}, this);
-    _router.namespace = (url) => {
+    /**
+     * 设置父级路由
+     * @param {String} url the sub router
+     * @return {Symbol#SUBROUTER} the new subroute name
+     */
+    router.namespace = url => {
       this[SUBROUTER] = url;
-      return this[SUBROUTER] ;
+      return this[SUBROUTER];
     };
-    _router._getnamespace = () => {
-      return this[SUBROUTER] ;
+    /**
+     * 得到当前父级路由
+     * @return {Symbol#SUBROUTER} the subroute name
+     */
+    router.getNamespace = () => {
+      return this[SUBROUTER];
     };
-    //proxy
-    const router = this[ROUTER] = new Proxy(_router, handler);
-    this.use(router.middleware());
-    return router;
-  }
+    this[ROUTER] = new Proxy(router, handler);
+    this.use(this[ROUTER].middleware());
+    return this[ROUTER];
+  },
 };
