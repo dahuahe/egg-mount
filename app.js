@@ -14,6 +14,7 @@ module.exports = app => {
           opt.pathName.replace(/router/g, '')
             .split('.')
             .join('/'));
+
         return obj;
       },
     })).load();
